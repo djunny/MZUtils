@@ -1,0 +1,48 @@
+<html>
+<head>
+<title>test</title>
+<link rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.13.0.css">
+</head>
+<body>
+<script src="http://code.jquery.com/qunit/qunit-1.13.0.js"></script>
+<script src="./src/string.js"></script>
+<div id="qunit"></div>
+<div id="qunit-fixture"></div>
+<div id="result"></div>
+<script>
+(function(){
+    /*
+    function l(m) {
+        var testStr = "123test321",
+            tmpStr = "";
+        var startTime, endTime;
+        var d = new Date();
+        for (var p in m) {
+            startTime = d.getTime();
+            tmpStr += m[p] + '=' + testStr.match(m[p]) + "(" + ((new Date()).getTime() - startTime) + "ms)<br>";
+        }
+        document.getElementById('result').innerHTML += tmpStr;
+    }
+
+    l(["t(*)2", "[*]t(*)2", "(*)2", "2(*)", "[*]2(*)", "(*)2[*]", "[*]t(*)3"]);
+    */
+    //match function
+    test("match string[normal]", function () {
+        var testString;
+
+        function testFor(pattern, check) {
+            var res = testString.match(pattern)
+            ok(res == check, pattern + ": Passed!");
+        }
+        testString = "123test123";
+        testFor("t(*)", "est123");
+        testFor("(*)3", "12");
+        testFor("[*]2(*)t", "3");
+        testFor("[*]t(*)5", "");
+        testFor("[*]t(*)3[*]", "est12");
+        testFor("test(*)3", "12");
+        testFor("123(*)3", "test12");
+    });
+})();
+</script>
+</body></html>
